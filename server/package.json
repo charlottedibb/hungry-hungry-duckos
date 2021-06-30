@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "migrate": "knex migrate:latest --knexfile db/knexfile.js",
-    "rollback": "knex migrate:rollback --knexfile db/knexfile.js"
+    "rollback": "knex migrate:rollback --knexfile db/knexfile.js",
+    "seed": "knex seed:run --knexfile db/knexfile.js"
   },
   "author": "",
   "license": "ISC",
