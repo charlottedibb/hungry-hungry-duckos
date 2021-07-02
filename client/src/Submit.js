@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+// import { BrowserRouter as Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Form } from "semantic-ui-react";
 import axios from "axios";
 
 export default function Submit() {
+  let history = useHistory();
   const [formInput, setFormInput] = useState({
     latitude: 0,
     longitude: 0,
@@ -12,6 +15,8 @@ export default function Submit() {
     feedingTime: null
   });
 
+  const [success, setSuccess] = useState(false);
+
   const handleChange = e => {
     setFormInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -19,7 +24,7 @@ export default function Submit() {
   const handleSubmit = e => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/feedings`, formInput)
-      .then(response => console.log(response))
+      .then(response => history.push("/view"))
       .catch(error => {
         console.error("There was an error!", error);
       });
