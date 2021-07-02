@@ -27,7 +27,7 @@ export default function Submit() {
       <Form.Input
         label="Food Amount"
         type="text"
-        name="foodType"
+        name="foodAmount"
         placeholder="e.g 500g"
         onChange={e => handleChange(e)}
       />
