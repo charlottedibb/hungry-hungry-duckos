@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// import { BrowserRouter as Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Form } from "semantic-ui-react";
 import axios from "axios";
 
 export default function Submit() {
   let history = useHistory();
+  
   const [formInput, setFormInput] = useState({
     latitude: 0,
     longitude: 0,
@@ -14,8 +14,6 @@ export default function Submit() {
     foodAmount: "",
     feedingTime: null
   });
-
-  const [success, setSuccess] = useState(false);
 
   const handleChange = e => {
     setFormInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
