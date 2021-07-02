@@ -14,16 +14,47 @@ export default function View() {
       });
   }, []);
 
-  const cards = feedings.map(feeding => (
-    <Card
-      header={`${feeding.duck_count} ducks were feed`}
-      meta={`Latitude: ${feeding.latitude}`}
-      meta={`Longitude: ${feeding.longitude}`}
-      meta={feeding.feeding_time}
-      description={`Type of food: ${feeding.food_type}`}
-      description={`Amount of food: ${feeding.food_amount}`}
-    />
-  ));
+  const cards = feedings.map(feeding => {
+    const formattedDate = new Date(feeding.feeding_time).toLocaleDateString(
+      undefined,
+      {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      }
+    );
+
+    const formattedTime = new Date(feeding.feeding_time).toLocaleTimeString(
+      undefined,
+      {
+        timeZoneName: "short"
+      }
+    );
+
+    const description = (
+      <ul>
+        <li>Type of food: {feeding.food_type}</li>
+        <li>Amount of food: {feeding.food_amount}</li>
+        <li>Time fed: {formattedTime}</li>
+      </ul>
+    );
+
+    const extra = (
+      <ul>
+        <li>Latitude: {feeding.latitude}</li>
+        <li>Longitude: {feeding.longitude}</li>
+      </ul>
+    );
+
+    return (
+      <Card
+        header={`${feeding.duck_count} ducks were fed`}
+        meta={formattedDate}
+        description={description}
+        extra={extra}
+      />
+    );
+  });
 
   return <div>{cards}</div>;
 }
