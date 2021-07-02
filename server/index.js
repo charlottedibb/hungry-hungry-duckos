@@ -18,7 +18,8 @@ app.get("/feedings", async (req, res, next) => {
         "food_type",
         "food_amount",
         "latitude",
-        "longitude"
+        "longitude",
+        "feeding_time"
       );
     res.json(feedings);
   } catch (error) {
@@ -29,9 +30,22 @@ app.get("/feedings", async (req, res, next) => {
 
 app.post("/feedings", async (req, res, next) => {
   try {
-    // knex("feedings").insert({ email: "hi@example.com" });
-    console.log("req.body is", req.body);
-    // res.json(feedings);
+    const {
+      latitude,
+      longitude,
+      duckCount: duck_count,
+      foodType: food_type,
+      foodAmount: food_amount,
+      feedingTime: feeding_time
+    } = req.body;
+    await knex("feedings").insert({
+      latitude,
+      longitude,
+      duck_count,
+      food_type,
+      food_amount,
+      feeding_time
+    });
     res.send("success!");
   } catch (error) {
     // pass error to default handler
