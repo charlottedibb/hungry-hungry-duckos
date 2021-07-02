@@ -2,24 +2,23 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Submit from "./Submit";
 import View from "./View";
+import { Menu } from "semantic-ui-react";
 
 export default function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/submit">Submit</Link>
-            </li>
-            <li>
-              <Link to="/view">View</Link>
-            </li>
-          </ul>
-        </nav>
+      <main>
+        <Menu>
+          <Menu.Item header>
+            <Link to="/">Hungry Hungry Duckos</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/view">View Feedings</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/submit">Submit a Report</Link>
+          </Menu.Item>
+        </Menu>
 
         <Switch>
           <Route path="/submit">
@@ -29,10 +28,10 @@ export default function App() {
             <View />
           </Route>
           <Route path="/">
-            <h1>Welcome</h1>
+            <h1>Welcome to Hungry Hungry Duckos</h1>
           </Route>
         </Switch>
-      </div>
+      </main>
     </Router>
   );
 }
