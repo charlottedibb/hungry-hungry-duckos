@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "semantic-ui-react";
 
 export default function Submit() {
   const [formInput, setFormInput] = useState({
-    location: "",
+    latitude: 0,
+    longitude: 0,
     duckCount: 0,
     foodType: "",
     foodAmount: "",
@@ -11,7 +12,7 @@ export default function Submit() {
   });
 
   const handleChange = e => {
-    setFormInput({ [e.target.name]: e.target.value });
+    setFormInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
@@ -34,7 +35,7 @@ export default function Submit() {
         label="Number of ducks"
         type="number"
         name="duckCount"
-        value="0"
+        placeholder="0"
         onChange={e => handleChange(e)}
       />
       <Form.Input
