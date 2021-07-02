@@ -1,9 +1,11 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const knex = require("./db/knex.js");
 const app = express();
 const apiPort = 3000;
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => res.send("hi"));
 
