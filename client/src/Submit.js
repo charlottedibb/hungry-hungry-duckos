@@ -32,6 +32,7 @@ export default function Submit() {
         type="text"
         name="foodType"
         placeholder="e.g seed, bread"
+        required
         onChange={e => handleChange(e)}
       />
       <Form.Input
@@ -39,6 +40,7 @@ export default function Submit() {
         type="text"
         name="foodAmount"
         placeholder="e.g 500g"
+        required
         onChange={e => handleChange(e)}
       />
       <Form.Input
@@ -46,12 +48,14 @@ export default function Submit() {
         type="number"
         name="duckCount"
         placeholder="0"
+        required
         onChange={e => handleChange(e)}
       />
       <Form.Input
         label="Date and time of feeding"
         type="datetime-local"
         name="feedingTime"
+        required
         onChange={e => handleChange(e)}
       />
       <Form.Button type="submit">Submit</Form.Button>
