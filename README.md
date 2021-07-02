@@ -1,5 +1,10 @@
 # Hungry Hungry Duckos
 
+## Prerequisites
+- NodeJs
+- NPM
+- MySQL 
+
 ## Getting started
 
 Clone the repository 
