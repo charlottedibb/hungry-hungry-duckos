@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form } from "semantic-ui-react";
+import axios from "axios";
 
 export default function Submit() {
   const [formInput, setFormInput] = useState({
@@ -8,15 +9,24 @@ export default function Submit() {
     duckCount: 0,
     foodType: "",
     foodAmount: "",
-    time: ""
+    feedingTime: null
   });
 
   const handleChange = e => {
     setFormInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleSubmit = e => {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/feedings`, formInput)
+      .then(response => console.log(response))
+      .catch(error => {
+        console.error("There was an error!", error);
+      });
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Input
         label="Food Type"
         type="text"
@@ -41,9 +51,10 @@ export default function Submit() {
       <Form.Input
         label="Date and time of feeding"
         type="datetime-local"
-        name="duckCount"
+        name="feedingTime"
         onChange={e => handleChange(e)}
       />
+      <Form.Button type="submit">Submit</Form.Button>
     </Form>
   );
 }
