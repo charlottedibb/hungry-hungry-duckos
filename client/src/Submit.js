@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Submit() {
   let history = useHistory();
-  
+
   const [formInput, setFormInput] = useState({
     latitude: 0,
     longitude: 0,
@@ -14,6 +14,20 @@ export default function Submit() {
     foodAmount: "",
     feedingTime: null
   });
+
+  const getLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        setFormInput(prev => ({
+          ...prev,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }));
+      });
+    } else {
+      alert("Please enable location services to use this feature");
+    }
+  };
 
   const handleChange = e => {
     setFormInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,7 +43,7 @@ export default function Submit() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={e => e.preventDefault()}>
       <Form.Input
         label="Food Type"
         type="text"
@@ -61,7 +75,26 @@ export default function Submit() {
         required
         onChange={e => handleChange(e)}
       />
-      <Form.Button type="submit">Submit</Form.Button>
+      <Form.Button onClick={getLocation}>Get My Current Location</Form.Button>
+      <Form.Input
+        label="Latitude"
+        type="number"
+        name="latitude"
+        value={formInput.latitude}
+        required
+        onChange={e => handleChange(e)}
+      />
+      <Form.Input
+        label="Longitude"
+        type="number"
+        name="longitude"
+        value={formInput.longitude}
+        required
+        onChange={e => handleChange(e)}
+      />
+      <Form.Button type="submit" onClick={handleSubmit}>
+        Submit
+      </Form.Button>
     </Form>
   );
 }
